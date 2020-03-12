@@ -7,7 +7,7 @@ USE relaxly;
 CREATE TABLE locations (
   id INT NOT NULL AUTO_INCREMENT,
   rate INT,
-  review_avg INT,
+  review_avg DECIMAL(3,2),
   total_review INT,
   service_fee INT,
   occupancy_tax INT,
