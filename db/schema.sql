@@ -16,8 +16,8 @@ CREATE TABLE locations (
 
 CREATE TABLE reservations (
   id INT NOT NULL AUTO_INCREMENT,
-  checkin_date DATE NOT NULL,
-  checkout_date DATE NOT NULL,
+  checkin_date DATE,
+  checkout_date DATE,
   adults INT,
   children INT,
   infants INT,
