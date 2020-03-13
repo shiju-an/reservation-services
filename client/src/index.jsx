@@ -14,11 +14,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getAllReservations();
+    this.getFirstReservations();
   }
 
+  //
   // eslint-disable-next-line class-methods-use-this
-  getAllReservations() {
+  getFirstReservations() {
     $.ajax({
       method: 'GET',
       url: './reservations',

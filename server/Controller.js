@@ -1,7 +1,7 @@
 const Models = require('./Models.js');
 
-const getAllReservations = (req, res) => {
-  Models.getAllReservations((err, data) => {
+const getFirstReservations = (req, res) => {
+  Models.getFirstReservations((err, data) => {
     if (err) {
       res.status(404).send();
     } else {
@@ -10,4 +10,4 @@ const getAllReservations = (req, res) => {
   });
 };
 
-module.exports = { getAllReservations };
+module.exports = { getFirstReservations };

@@ -7,7 +7,7 @@ const port = 3000;
 app.use(express.static('client/dist'));
 
 app.get('/reservations', (req, res) => {
-  Controller.getAllReservations(req, res);
+  Controller.getFirstReservations(req, res);
 });
 
 // eslint-disable-next-line no-console
