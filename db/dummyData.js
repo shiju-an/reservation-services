@@ -41,15 +41,17 @@ const howManyDays = (start, end) => (end.getTime() - start.getTime()) / (1000 * 
 
 // 5 to 10 reservations per home
 const seedReservations = () => {
-  for (let i = 0; i < 1; i++) {
+  for (let i = 1; i < 2; i++) {
     for (let j = 0; j < Math.floor((Math.random() * 5) + 5); j++) {
       let checkin = startDate;
+      console.log(checkin);
       let checkout = randDate();
+      console.log(checkout);
       let adults = randRange(1, 5);
       let children = randRange(0, 5);
       let infants = randRange(0, 5);
       // let price =
-      db.query(`INSERT INTO reservations (checkin_date, checkout_date, adults, children, infants) VALUES ('${checkin.getFullYear()}-${checkin.getMonth()}-${checkin.getDate()}', '${checkout.getFullYear()}-${checkout.getMonth()}-${checkout.getDate()}', ${adults}, ${children}, ${infants})`);
+      db.query(`INSERT INTO reservations (checkin_date, checkout_date, adults, children, infants, price, locationId) VALUES ('${checkin.getFullYear()}-${checkin.getMonth()}-${checkin.getDate()}', '${checkout.getFullYear()}-${checkout.getMonth()}-${checkout.getDate()}', ${adults}, ${children}, ${infants}, 5, ${i})`);
     }
   }
 };
