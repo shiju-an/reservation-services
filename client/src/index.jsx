@@ -1,5 +1,8 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable no-console */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
 
 
 class App extends React.Component {
@@ -10,6 +13,21 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.getAllReservations();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  getAllReservations() {
+    $.ajax({
+      method: 'GET',
+      url: './reservations',
+      success: (data) => {
+        console.log(data);
+      },
+      error: () => {}
+    });
+  }
 
   render() {
     return (
