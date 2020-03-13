@@ -7,8 +7,12 @@
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {},
+  "scripts": {
+    "seed": "node ./db/dummyData.js"
+  },
   "dependencies": {
+    "date-faker": "^1.1.5",
+    "faker": "^4.1.0",
     "mysql": "^2.18.1"
   },
   "devDependencies": {
