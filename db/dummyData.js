@@ -2,8 +2,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-const */
 const db = require('./index.js');
-// eslint-disable-next-line no-var
-// var startDate = new Date(2020, 2, 12);
 
 // random num between range, takes in a max and a min
 const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
@@ -25,21 +23,10 @@ const seedLocations = () => {
   }
 };
 
-// date helper function
-// const randDate = () => {
-//   startDate.setDate(startDate.getDate() + randRange(1, 45));
-//   return startDate;
-// };
-
-// helper function to compare days, must pass date objects in
-// const howManyDays = (start, end) => (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24);
 
 // 5 to 10 reservations per home
 const seedReservations = () => {
   for (let i = 1; i <= 100; i++) {
-    // var year = 2020
-    // var month = 1
-    // var day = 1
     for (let j = 0; j < Math.floor((Math.random() * 5) + 5); j++) {
       let checkin = `2020-${j + 1}-${randRange(1, 14)}`;
       let checkout = `2020-${j + 1}-${randRange(15, 28)}`;
