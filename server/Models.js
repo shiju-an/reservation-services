@@ -1,7 +1,7 @@
 const db = require('../db');
 
-const getFirstReservations = (callback) => {
-  db.query('SELECT * FROM reservations WHERE locationId = 1', (err, data) => {
+const getFirstReservations = (id, callback) => {
+  db.query(`SELECT * FROM reservations WHERE locationId = ${id}`, (err, data) => {
     if (err) {
       callback(err);
     } else {
@@ -10,4 +10,14 @@ const getFirstReservations = (callback) => {
   });
 };
 
-module.exports = { getFirstReservations };
+const getLocation = (id, callback) => {
+  db.query(`SELECT * FROM locations WHERE id = ${id}`, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+module.exports = { getFirstReservations, getLocation };
