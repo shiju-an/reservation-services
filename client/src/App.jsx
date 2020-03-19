@@ -76,6 +76,8 @@ class App extends React.Component {
         <hr />
         <Reservation
           rate={this.state.rate}
+          service={this.state.service_fee}
+          occupancy={this.state.occupancy_tax}
         />
       </div>
     );
