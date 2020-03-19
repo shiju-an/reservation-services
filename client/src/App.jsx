@@ -8,6 +8,8 @@ import React from 'react';
 import $ from 'jquery';
 import RateReview from './RateReview.jsx';
 import Reservation from './Reservation.jsx';
+// import Calendar from './Calendar.jsx';
+import Guests from './Guests.jsx';
 
 const focalId = 7;
 
@@ -73,6 +75,10 @@ class App extends React.Component {
           avg={this.state.review_avg}
           total={this.state.total_review}
         />
+        <hr />
+        <div>
+          <Guests />
+        </div>
         <hr />
         <Reservation
           rate={this.state.rate}
