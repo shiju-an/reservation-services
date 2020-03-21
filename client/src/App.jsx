@@ -35,11 +35,36 @@ class App extends React.Component {
       calendarOpen: false,
       guestsOpen: false,
       checkIn: 'Check-in',
-      checkOut: 'Checkout'
+      checkOut: 'Checkout',
+      adults: 0,
+      children: 0,
+      infants: 0
     };
 
     // bindings
     this.calendarPopUp = this.calendarPopUp.bind(this);
+    this.decrease = this.decrease.bind(this);
+    this.increase = this.increase.bind(this);
+  }
+
+  increase(event) {
+    const { name } = event.target;
+    let newState = this.state[name] + 1;
+    this.setState({
+      [name]: newState
+    });
+    console.log('increase');
+  }
+
+  decrease(event) {
+    const { name } = event.target;
+    if (this.state[name] > 0) {
+      let newState = this.state[name] - 1;
+      this.setState({
+        [name]: newState
+      });
+    }
+    console.log('decreased');
   }
 
   componentDidMount() {
@@ -89,6 +114,7 @@ class App extends React.Component {
     });
   }
 
+
   render() {
     return (
       <AppWrapper>
@@ -102,7 +128,7 @@ class App extends React.Component {
         {this.state.calendarOpen ? <Calendar /> : null}
         <hr />
         <div>
-          <Guests />
+          <Guests increase={this.increase} decrease={this.decrease} adults={this.state.adults} children={this.state.children} infants={this.state.infants}/>
         </div>
         <hr />
         <Reservation

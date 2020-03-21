@@ -8,7 +8,7 @@ const Reservation = ({ rate, service, occupancy}) => (
     </div>
     <hr />
     <div>
-    {`Service Fee $${service} `}
+      {`Service Fee $${service} `}
     </div>
     <hr />
     <div>
