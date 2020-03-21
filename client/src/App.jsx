@@ -6,12 +6,21 @@
 /* eslint-disable no-console */
 import React from 'react';
 import $ from 'jquery';
+import styled from 'styled-components';
 import RateReview from './RateReview.jsx';
 import Reservation from './Reservation.jsx';
-// import Calendar from './Calendar.jsx';
+import Calendar from './calendar/Calendar.jsx';
 import Guests from './Guests.jsx';
 
 const focalId = 7;
+
+
+const AppWrapper = styled.div`
+  text-align: left;
+  border: 0.5px solid grey;
+  padding: 15px;
+  width: 35%;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -22,8 +31,15 @@ class App extends React.Component {
       review_avg: '',
       total_review: '',
       service_fee: '',
-      occupancy_tax: ''
+      occupancy_tax: '',
+      calendarOpen: false,
+      guestsOpen: false,
+      checkIn: 'Check-in',
+      checkOut: 'Checkout'
     };
+
+    // bindings
+    this.calendarPopUp = this.calendarPopUp.bind(this);
   }
 
   componentDidMount() {
@@ -67,14 +83,23 @@ class App extends React.Component {
     });
   }
 
+  calendarPopUp() {
+    this.setState({
+      calendarOpen: !this.state.calendarOpen
+    });
+  }
+
   render() {
     return (
-      <div>
+      <AppWrapper>
         <RateReview
           rate={this.state.rate}
           avg={this.state.review_avg}
           total={this.state.total_review}
         />
+        <hr />
+    <div  onClick={this.calendarPopUp}><span>{this.state.checkIn}</span> --> <span>{this.state.checkOut}</span></div>
+        {this.state.calendarOpen ? <Calendar /> : null}
         <hr />
         <div>
           <Guests />
@@ -85,7 +110,7 @@ class App extends React.Component {
           service={this.state.service_fee}
           occupancy={this.state.occupancy_tax}
         />
-      </div>
+      </AppWrapper>
     );
   }
 }

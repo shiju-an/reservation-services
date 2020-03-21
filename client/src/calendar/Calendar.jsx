@@ -1,7 +1,10 @@
+/* eslint-disable react/jsx-curly-brace-presence */
+/* eslint-disable prefer-const */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-array-index-key */
-import React from "react";
-import moment from "moment";
-import Weekdays from "./Weekdays.jsx";
+import React from 'react';
+import moment from 'moment';
+import Weekdays from './Weekdays.jsx';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -9,8 +12,9 @@ class Calendar extends React.Component {
     this.state = {
       formatContext: moment(),
       today: moment(),
-      showMonthPopup: false,
-      showYearPopup: false
+      checkIn: 'Check-in',
+      checkOut: 'Checkout',
+      nights: 1
     };
     // variables
     this.weekdays = moment.weekdays();
@@ -24,16 +28,11 @@ class Calendar extends React.Component {
     this.currentDate = this.currentDate.bind(this);
     this.currentDay = this.currentDay.bind(this);
     this.firstDayOfMonth = this.firstDayOfMonth.bind(this);
+    this.nextMonth = this.nextMonth.bind(this);
+    this.lastMonth = this.lastMonth.bind(this);
+    this.selectDay = this.selectDay.bind(this);
   }
 
-  componentDidMount() {
-    this.year()
-    this.month()
-    this.daysInMonth()
-    this.currentDate()
-    this.currentDay()
-    this.firstDayOfMonth();
-  }
 
   year() {
     return this.state.formatContext.format('Y');
@@ -61,19 +60,42 @@ class Calendar extends React.Component {
     return firstDay;
   }
 
+  nextMonth() {
+    let { formatContext } = this.state;
+    let newMonthContext = { ...formatContext };
+    newMonthContext = moment(formatContext).add(1, 'month');
+    this.setState({
+      formatContext: newMonthContext
+    });
+  }
 
+  lastMonth() {
+    let { formatContext } = this.state;
+    let newMonthContext = { ...formatContext };
+    newMonthContext = moment(formatContext).subtract(1, 'month');
+    this.setState({
+      formatContext: newMonthContext
+    });
+  }
+
+  selectDay(event, day, formatContext) {
+    let year = this.year();
+    let month = formatContext.format('M');
+    let date = `${month}/${day}/${year}`;
+    console.log(date);
+  }
 
 
   render() {
     let blankDays = [];
     for (let i = 0; i < this.firstDayOfMonth(); i++) {
-      blankDays.push(<td className="empty-days">{''}</td>);
+      blankDays.push(<td key={i * Math.random()} className="empty-days">{''}</td>);
     }
     let existingDays = [];
     for (let i = 1; i < this.daysInMonth() + 1; i++) {
       let className = (i === this.currentDay() ? "day current-day" : "day");
       existingDays.push(
-        <td key={i} className={className}>
+        <td key={i} className={className} onClick={(event) => this.selectDay(event, i, this.state.formatContext)}>
           <span>{i}</span>
         </td>
       );
@@ -105,7 +127,12 @@ class Calendar extends React.Component {
       <div className="calendar-container">
         <table className="calendar">
           <thead>
-            <tr className="calendar-header" />
+            <tr className="calendar-header">
+              <td onClick={this.lastMonth} colSpan="2">{'<-'}</td>
+              <td colSpan="6">{`${this.month()}, ${this.year()}`}</td>
+              <td onClick={this.nextMonth} colSpan="2">{'->'}</td>
+
+            </tr>
           </thead>
           <tbody>
             <Weekdays weekdays={this.short} />
