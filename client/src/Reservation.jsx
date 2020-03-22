@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Reservation = ({ rate, service, occupancy}) => (
+const Reservation = ({ rate, service, occupancy, nights}) => (
   <div>
     <div>
-      {`$${rate} x ${6} nights`}
-      {` $${rate * 6}`}
+      {`$${rate} x ${nights} nights`}
+      {` $${rate * nights}`}
     </div>
     <hr />
     <div>

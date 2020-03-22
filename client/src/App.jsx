@@ -7,6 +7,7 @@
 import React from 'react';
 import $ from 'jquery';
 import styled from 'styled-components';
+import moment from 'moment';
 import RateReview from './RateReview.jsx';
 import Reservation from './Reservation.jsx';
 import Calendar from './calendar/Calendar.jsx';
@@ -38,13 +39,17 @@ class App extends React.Component {
       checkOut: 'Checkout',
       adults: 0,
       children: 0,
-      infants: 0
+      infants: 0,
+      nights: 1
     };
 
     // bindings
     this.calendarPopUp = this.calendarPopUp.bind(this);
     this.decrease = this.decrease.bind(this);
     this.increase = this.increase.bind(this);
+    this.updateCheckIn = this.updateCheckIn.bind(this);
+    this.updateCheckOut = this.updateCheckOut.bind(this);
+    this.updateNights = this.updateNights.bind(this);
   }
 
   increase(event) {
@@ -114,6 +119,33 @@ class App extends React.Component {
     });
   }
 
+  updateCheckIn(date){
+    this.setState({
+      checkIn: date
+    })
+  }
+
+  updateCheckOut(date){
+    this.setState({
+      checkOut: date
+    })
+  }
+
+  updateNights(){
+    var dayIn = this.state.checkIn.split('/');
+
+    var momentIn = moment([dayIn[2], dayIn[0], dayIn[1]]);
+
+    var dayOut = this.state.checkOut.split('/');
+
+    var momentOut = moment([dayOut[2], dayOut[0], dayOut[1]]);
+
+    var difference = momentOut.diff(momentIn, 'days')
+    console.log(difference);
+    this.setState({
+      nights: difference
+    });
+  }
 
   render() {
     return (
@@ -125,16 +157,17 @@ class App extends React.Component {
         />
         <hr />
     <div  onClick={this.calendarPopUp}><span>{this.state.checkIn}</span> --> <span>{this.state.checkOut}</span></div>
-        {this.state.calendarOpen ? <Calendar /> : null}
+        {this.state.calendarOpen ? <Calendar updateCheckIn={this.updateCheckIn} updateCheckOut={this.updateCheckOut} updateNights={this.updateNights} /> : null}
         <hr />
-        <div>
+        <div>Guests</div>
+    <div>{this.state.adults + this.state.infants + this.state.children} guest(s)</div>
           <Guests increase={this.increase} decrease={this.decrease} adults={this.state.adults} children={this.state.children} infants={this.state.infants}/>
-        </div>
         <hr />
         <Reservation
           rate={this.state.rate}
           service={this.state.service_fee}
           occupancy={this.state.occupancy_tax}
+          nights={this.state.nights}
         />
       </AppWrapper>
     );

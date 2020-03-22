@@ -13,8 +13,7 @@ class Calendar extends React.Component {
       formatContext: moment(),
       today: moment(),
       checkIn: 'Check-in',
-      checkOut: 'Checkout',
-      nights: 1
+      checkOut: 'Checkout'
     };
     // variables
     this.weekdays = moment.weekdays();
@@ -83,6 +82,19 @@ class Calendar extends React.Component {
     let month = formatContext.format('M');
     let date = `${month}/${day}/${year}`;
     console.log(date);
+
+    if (this.state.checkIn === 'Check-in') {
+      this.props.updateCheckIn(date);
+      this.setState({
+        checkIn: date
+      });
+    } else {
+      this.props.updateCheckOut(date);
+      this.setState({
+        checkOut: date
+      });
+      setTimeout(() => this.props.updateNights(), 0);
+    }
   }
 
 
