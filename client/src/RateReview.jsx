@@ -4,7 +4,7 @@ import React from 'react';
 const RateReview = ({ rate, avg, total }) => (
   <div>
     <div id="rate">
-      {`$${rate}/night`}
+      {`$${rate} per night`}
     </div>
     <div id="reviews">
       {`${avg}(${total} reviews)`}
