@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable comma-dangle */
 import React from 'react';
 
 

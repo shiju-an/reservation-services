@@ -94,6 +94,7 @@ class Calendar extends React.Component {
         checkOut: date
       });
       setTimeout(() => this.props.updateNights(), 0);
+      setTimeout(() => this.props.updateTotal(), 1);
     }
   }
 
