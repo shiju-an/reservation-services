@@ -31,7 +31,7 @@ class App extends React.Component {
       guestsOpen: false,
       checkIn: 'Check-in',
       checkOut: 'Checkout',
-      adults: 0,
+      adults: 1,
       children: 0,
       infants: 0,
       nights: 1,

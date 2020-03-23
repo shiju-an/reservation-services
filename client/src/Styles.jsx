@@ -15,7 +15,6 @@ const AppWrapper = styled.div`
   border-top-style: solid;
   border-top-width: 1px;
   box-sizing: border-box;
-  color: rgb(72, 72, 72);
   display: block;
   font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px;
@@ -48,6 +47,7 @@ const Price = styled.span`
 const Star = styled.img`
   width: 9px;
 `;
+
 
 const Reserve = styled.button`
   display: inline-block !important;
@@ -86,4 +86,15 @@ const Reserve = styled.button`
   color: #ffffff !important;
 `;
 
-export default { AppWrapper, Reserve, Price, Star };
+const CircleButton = styled.button`
+  background-color: #ffffff;
+  border: solid;
+  border-color: green;
+  padding: 5px;
+  display: inline-block;
+  margin: 4px 2px;
+  border-radius: 50%;
+  border-width: .5px;
+`;
+
+export default { AppWrapper, Reserve, Price, Star, CircleButton };

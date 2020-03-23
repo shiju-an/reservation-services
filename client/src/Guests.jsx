@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import styled from './Styles.jsx';
 
+const { CircleButton } = styled;
 
 const Guests = ({
   decrease, increase, children, infants, adults
@@ -11,25 +13,25 @@ const Guests = ({
         <tr>
           <td>Adults</td>
           <td>
-            <button type="button" name="adults" onClick={decrease}>-</button>
+            <CircleButton type="button" name="adults" onClick={decrease}> - </CircleButton>
             {adults}
-            <button type="button" name="adults" onClick={increase}>+</button>
+            <CircleButton type="button" name="adults" onClick={increase}> + </CircleButton>
           </td>
         </tr>
         <tr>
           <td>Children</td>
           <td>
-            <button type="button" name="children" onClick={decrease}>-</button>
+            <CircleButton type="button" name="children" onClick={decrease}> - </CircleButton>
             {children}
-            <button type="button" name="children" onClick={increase}>+</button>
+            <CircleButton type="button" name="children" onClick={increase}> + </CircleButton>
           </td>
         </tr>
         <tr>
           <td>Infants</td>
           <td>
-            <button type="button" name="infants" onClick={decrease}>-</button>
+            <CircleButton type="button" name="infants" onClick={decrease}> - </CircleButton>
             {infants}
-            <button type="button" name="infants" onClick={increase}>+</button>
+            <CircleButton type="button" name="infants" onClick={increase}> + </CircleButton>
           </td>
         </tr>
       </tbody>
