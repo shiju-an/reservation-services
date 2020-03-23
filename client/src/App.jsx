@@ -5,23 +5,17 @@
 /* eslint-disable no-console */
 import React from 'react';
 import $ from 'jquery';
-import styled from 'styled-components';
 import moment from 'moment';
 
 import RateReview from './RateReview.jsx';
-import Reservation from './Reservation.jsx';
+import Pricing from './Pricing.jsx';
 import Calendar from './calendar/Calendar.jsx';
 import Guests from './Guests.jsx';
+import styled from './Styles.jsx';
 
 const focalId = 7;
 
-
-const AppWrapper = styled.div`
-  text-align: left;
-  border: 0.5px solid grey;
-  padding: 15px;
-  width: 35%;
-`;
+const { AppWrapper, Reserve } = styled;
 
 class App extends React.Component {
   constructor(props) {
@@ -46,6 +40,7 @@ class App extends React.Component {
 
     // bindings
     this.calendarPopUp = this.calendarPopUp.bind(this);
+    this.guestPopUp = this.guestPopUp.bind(this);
     this.decrease = this.decrease.bind(this);
     this.increase = this.increase.bind(this);
     this.updateCheckIn = this.updateCheckIn.bind(this);
@@ -123,6 +118,12 @@ class App extends React.Component {
     });
   }
 
+  guestPopUp() {
+    this.setState({
+      guestsOpen: !this.state.guestsOpen
+    });
+  }
+
   updateCheckIn(date){
     this.setState({
       checkIn: date
@@ -136,10 +137,8 @@ class App extends React.Component {
   }
 
   updateNights(){
-    var dayIn = this.state.checkIn.split('/');
-    var momentIn = moment([dayIn[2], dayIn[0], dayIn[1]]);
-    var dayOut = this.state.checkOut.split('/');
-    var momentOut = moment([dayOut[2], dayOut[0], dayOut[1]]);
+    var momentIn = moment(this.state.checkIn, 'MM.DD.YYYY');
+    var momentOut = moment(this.state.checkOut, 'MM.DD.YYYY');
     var difference = momentOut.diff(momentIn, 'days')
     console.log(difference);
 
@@ -163,19 +162,21 @@ class App extends React.Component {
           total={this.state.total_review}
         />
         <hr />
-    <div  onClick={this.calendarPopUp}><span>{this.state.checkIn}</span> --> <span>{this.state.checkOut}</span></div>
+        <div  onClick={this.calendarPopUp}><span>{this.state.checkIn}</span> --> <span>{this.state.checkOut}</span></div>
         {this.state.calendarOpen ? <Calendar updateCheckIn={this.updateCheckIn} updateCheckOut={this.updateCheckOut} updateNights={this.updateNights} updateTotal={this.updateTotal}/> : null}
         <hr />
-        <div>Guests</div>
-    <div>{this.state.adults + this.state.infants + this.state.children} guest(s)</div>
-          <Guests increase={this.increase} decrease={this.decrease} adults={this.state.adults} children={this.state.children} infants={this.state.infants}/>
+        <div onClick={this.guestPopUp}>Guests</div>
+        <div>{this.state.adults + this.state.infants + this.state.children} guest(s)</div>
+          {this.state.guestsOpen ? <Guests increase={this.increase} decrease={this.decrease} adults={this.state.adults} children={this.state.children} infants={this.state.infants}/> : null}
         <hr />
-        <Reservation
+        {this.state.checkIn !== 'Check-in' && this.state.checkOut !== 'Checkout' ? <Pricing
           rate={this.state.rate}
           service={this.state.service_fee}
           occupancy={this.state.occupancy_tax}
           nights={this.state.nights}
-        />
+        /> : null}
+        <Reserve onClick={() => {console.log('hi'); }}>Reserve
+        </Reserve>
       </AppWrapper>
     );
   }

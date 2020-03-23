@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-const Reservation = ({
+const Pricing = ({
   rate, service, occupancy, nights
 }) => (
   <div>
@@ -19,12 +19,9 @@ const Reservation = ({
     </div>
     <hr />
     <div>
-      {`Total ${rate*nights + occupancy + service}`}
+      {`Total ${rate * nights + occupancy + service}`}
     </div>
-    <form>
-      <input type="submit" value="Reserve" />
-    </form>
   </div>
 );
 
-export default Reservation;
+export default Pricing;

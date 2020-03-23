@@ -105,7 +105,7 @@ class Calendar extends React.Component {
       blankDays.push(<td key={i * Math.random()} className="empty-days">{''}</td>);
     }
     let existingDays = [];
-    for (let i = 1; i < this.daysInMonth() + 1; i++) {
+    for (let i = 1; i <= this.daysInMonth(); i++) {
       let className = (i === this.currentDay() ? "day current-day" : "day");
       existingDays.push(
         <td key={i} className={className} onClick={(event) => this.selectDay(event, i, this.state.formatContext)}>
