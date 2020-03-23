@@ -1,4 +1,4 @@
-DROP DATABASE relaxly;
+DROP DATABASE IF EXISTS relaxly;
 
 CREATE DATABASE relaxly;
 

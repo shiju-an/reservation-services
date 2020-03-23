@@ -10,13 +10,9 @@
 
 ## Table of Contents
 
-1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-
-## Usage
-
-> Some usage instructions
+1. [Usage](#Usage)
 
 ## Requirements
 
@@ -32,7 +28,32 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 From within the root directory:
 
 ```sh
-npm install -g webpack
 npm install
 ```
+## Usage
+### To Run App - Once Dependencies Installed
 
+All occurs from within the root directory:
+
+-go to reservation-services/db/index.js to change mysql password
+
+Create mysql tables
+```sh
+mysql -u root -p < ./db/schema.sql
+```
+Seed your database with seeding script:
+
+```sh
+npm run seed
+```
+Build react app with script:
+
+```sh
+npm run react-dev
+```
+Run server:
+
+```sh
+npm run server-dev
+```
+Go to url http://localhost:3000/ to view app
