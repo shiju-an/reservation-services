@@ -32,7 +32,29 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 From within the root directory:
 
 ```sh
-npm install -g webpack
 npm install
 ```
 
+## To Run App - Once Dependencies Installed
+
+From within the root directory:
+
+```sh
+mysql -u root -p < ./db/schema.sql
+```
+Seed your database with seeding script:
+
+```sh
+npm run seed
+```
+Build react app with script:
+
+```sh
+npm run react-dev
+```
+Run server:
+
+```sh
+npm run server-dev
+```
+Go to url http://localhost:3000/ to view app
