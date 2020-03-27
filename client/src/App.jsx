@@ -50,16 +50,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getFirstReservations();
-    this.getLocation();
+    const splitUrl = window.location.href.split('/');
+    // console.log(splitUrl)
+    const index = splitUrl[splitUrl.length - 1];
+    // console.log(index);
+    this.getFirstReservations(index);
+    this.getLocation(index);
   }
 
   // requests
-  getFirstReservations() {
+  getFirstReservations(locationId) {
     $.ajax({
       method: 'GET',
       url: 'http://localhost:3000/reservation/api/reservations',
-      data: { id: focalId },
+      data: { id: locationId },
       success: (data) => {
         console.log(data);
       },
@@ -69,11 +73,11 @@ class App extends React.Component {
     });
   }
 
-  getLocation() {
+  getLocation(locationId) {
     $.ajax({
       method: 'GET',
       url: 'http://localhost:3000/reservation/api/location',
-      data: { id: focalId },
+      data: { id: locationId },
       success: (data) => {
         console.log(data);
         this.setState({
