@@ -7,7 +7,7 @@ import moment from 'moment';
 import Weekdays from './Weekdays.jsx';
 import styled from '../Styles.jsx';
 
-const { Days } = styled;
+const { Days, Cursor } = styled;
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -144,9 +144,9 @@ class Calendar extends React.Component {
         <table className="calendar">
           <thead>
             <tr className="calendar-header">
-              <td onClick={this.lastMonth} colSpan="2">{'<-'}</td>
+              <Cursor onClick={this.lastMonth} colSpan="2">{'<-'}</Cursor>
               <td colSpan="6">{`${this.month()}, ${this.year()}`}</td>
-              <td onClick={this.nextMonth} colSpan="2">{'->'}</td>
+              <Cursor onClick={this.nextMonth} colSpan="2">{'->'}</Cursor>
 
             </tr>
           </thead>

@@ -173,6 +173,10 @@ const Box = styled.div`
   width: 250px;
   cursor:pointer;
 
-`
+`;
 
-export default { AppWrapper, Reserve, Price, Star, CircleButton, Days, Box };
+const Cursor = styled.td`
+  cursor:pointer;
+`;
+
+export default { AppWrapper, Reserve, Price, Star, CircleButton, Days, Box, Cursor };
