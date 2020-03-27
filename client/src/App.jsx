@@ -15,7 +15,7 @@ import styled from './Styles.jsx';
 
 const focalId = 7;
 
-const { AppWrapper, Reserve } = styled;
+const { AppWrapper, Reserve, Box } = styled;
 
 class App extends React.Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class App extends React.Component {
   getFirstReservations() {
     $.ajax({
       method: 'GET',
-      url: './reservations',
+      url: 'http://localhost:3000/reservation/api/reservations',
       data: { id: focalId },
       success: (data) => {
         console.log(data);
@@ -72,7 +72,7 @@ class App extends React.Component {
   getLocation() {
     $.ajax({
       method: 'GET',
-      url: '/location',
+      url: 'http://localhost:3000/reservation/api/location',
       data: { id: focalId },
       success: (data) => {
         console.log(data);
@@ -162,11 +162,11 @@ class App extends React.Component {
           total={this.state.total_review}
         />
         <hr />
-        <div  onClick={this.calendarPopUp}><span>{this.state.checkIn}</span> --> <span>{this.state.checkOut}</span></div>
+        <Box  onClick={this.calendarPopUp}><span>{this.state.checkIn}</span> --> <span>{this.state.checkOut}</span></Box>
         {this.state.calendarOpen ? <Calendar updateCheckIn={this.updateCheckIn} updateCheckOut={this.updateCheckOut} updateNights={this.updateNights} updateTotal={this.updateTotal}/> : null}
         <hr />
-        <div onClick={this.guestPopUp}>Guests</div>
-        <div>{this.state.adults + this.state.infants + this.state.children} guest(s)</div>
+        <div>Guests</div>
+        <Box onClick={this.guestPopUp}>{this.state.adults + this.state.infants + this.state.children} guest(s)</Box>
           {this.state.guestsOpen ? <Guests increase={this.increase} decrease={this.decrease} adults={this.state.adults} children={this.state.children} infants={this.state.infants}/> : null}
         <hr />
         {this.state.checkIn !== 'Check-in' && this.state.checkOut !== 'Checkout' ? <Pricing
