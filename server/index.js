@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 const express = require('express');
 const bodyParser = require('body-parser');
-const Controller = require('./Controller.js');
 const path = require('path');
 const cors = require('cors');
+const Controller = require('./Controller.js');
 
 const app = express();
 const port = 3000;
