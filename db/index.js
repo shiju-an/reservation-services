@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
   // host: '172.17.0.4',
   // port: '3306',
   user: 'root',
-  password: '123', // TODO! Fill in password to your personal mysql password
+  password: 'monkey3', // TODO! Fill in password to your personal mysql password
   //alternate password for dockerized is 'something'
   database: 'relaxly',
 });
