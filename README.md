@@ -57,7 +57,20 @@ Go to url http://localhost:3000/ to view app
 POST /reservations/:id
 ```
 
-Parameters
+##### Sample Request
+```sh
+{
+"id": 1
+"checkin_date": "2020-01-03T08:00:00.000Z"
+"checkout_date": "2020-01-19T08:00:00.000Z"
+"adults": 4
+"children": 0
+"infants": 1
+"price": 1152
+"locationId": 1
+}
+```
+
 
 ### READ
 
@@ -66,9 +79,37 @@ Parameters
 GET /location/:id
 ```
 
+##### Sample Response
+On Success: JSON Object
+```sh
+{
+"id": 1
+"rate": 72
+"review_avg": 3.39
+"total_review": 143
+"service_fee": 8
+"occupancy_tax": 7
+}
+```
+
 ##### Get check in/check out dates, price, and guest info for specific home.
 ```sh
 GET /reservations/:id
+```
+
+##### Sample Response
+On Success: JSON Object
+```sh
+{
+"id": 1
+"checkin_date": "2020-01-03T08:00:00.000Z"
+"checkout_date": "2020-01-19T08:00:00.000Z"
+"adults": 4
+"children": 0
+"infants": 1
+"price": 1152
+"locationId": 1
+}
 ```
 
 ### UPDATE
@@ -78,9 +119,42 @@ GET /reservations/:id
 PUT /reservations/:id
 ```
 
+Only fields requested will be updated. Price will be updated to reflect changes.
+##### Sample Request
+```sh
+{
+"id": 1
+"checkin_date": "2020-01-03T08:00:00.000Z"
+"checkout_date": "2020-01-19T08:00:00.000Z"
+"locationId": 1
+}
+```
+
+##### Sample Response
+```sh
+{
+"id": 1
+"checkin_date": "2020-01-03T08:00:00.000Z"
+"checkout_date": "2020-01-19T08:00:00.000Z"
+"adults": 4
+"children": 0
+"infants": 1
+"price": 1152
+"locationId": 1
+}
+```
+
 ### DELETE
 
 #### Delete check in/check out dates, price, and guest info for specific home.
 ```sh
 DELETE /reservations/:id
+```
+
+##### Sample Request
+```sh
+{
+"id": 1
+"locationId": 1
+}
 ```
