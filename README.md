@@ -52,12 +52,12 @@ Go to url http://localhost:3000/ to view app
 
 ### CREATE
 
-#### Post check in/check out dates, price, and guest info for specific home.
+Post check in/check out dates, price, and guest info for specific home.
 ```sh
 POST /reservations/:id
 ```
 
-##### Sample Request
+#### Sample Request
 ```sh
 {
 "id": 1
@@ -74,13 +74,12 @@ POST /reservations/:id
 
 ### READ
 
-#### Get rate, review average, total reviews, service fee, and occupancy tax for specific home.
+Get rate, review average, total reviews, service fee, and occupancy tax for specific home.
 ```sh
 GET /location/:id
 ```
 
-##### Sample Response
-On Success: JSON Object
+#### Sample Response
 ```sh
 {
 "id": 1
@@ -92,13 +91,13 @@ On Success: JSON Object
 }
 ```
 
-##### Get check in/check out dates, price, and guest info for specific home.
+
+Get check in/check out dates, price, and guest info for specific home.
 ```sh
 GET /reservations/:id
 ```
 
-##### Sample Response
-On Success: JSON Object
+#### Sample Response
 ```sh
 {
 "id": 1
@@ -114,13 +113,13 @@ On Success: JSON Object
 
 ### UPDATE
 
-##### Update check in/check out dates, price, and guest info for specific home.
+Update check in/check out dates, price, and guest info for specific home.
 ```sh
 PUT /reservations/:id
 ```
 
 Only fields requested will be updated. Price will be updated to reflect changes.
-##### Sample Request
+#### Sample Request
 ```sh
 {
 "id": 1
@@ -130,7 +129,7 @@ Only fields requested will be updated. Price will be updated to reflect changes.
 }
 ```
 
-##### Sample Response
+#### Sample Response
 ```sh
 {
 "id": 1
@@ -146,12 +145,12 @@ Only fields requested will be updated. Price will be updated to reflect changes.
 
 ### DELETE
 
-#### Delete check in/check out dates, price, and guest info for specific home.
+Delete check in/check out dates, price, and guest info for specific home.
 ```sh
 DELETE /reservations/:id
 ```
 
-##### Sample Request
+#### Sample Request
 ```sh
 {
 "id": 1
