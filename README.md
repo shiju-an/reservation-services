@@ -10,18 +10,8 @@
 
 ## Table of Contents
 
-1. [Requirements](#requirements)
-1. [Development](#development)
 1. [Usage](#Usage)
-
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
+1. [Endpoints](#Endpoints)
 
 ### Installing Dependencies
 
@@ -57,3 +47,40 @@ Run server:
 npm run server-dev
 ```
 Go to url http://localhost:3000/ to view app
+
+### Endpoints
+
+## CREATE
+
+# Post check in/check out dates, price, and guest info for specific home.
+```sh
+POST /reservations/:id
+```
+
+Parameters
+
+## READ
+
+# Get rate, review average, total reviews, service fee, and occupancy tax for specific home.
+```sh
+GET /location/:id
+```
+
+# Get check in/check out dates, price, and guest info for specific home.
+```sh
+GET /reservations/:id
+```
+
+## UPDATE
+
+# Update check in/check out dates, price, and guest info for specific home.
+```sh
+PUT /reservations/:id
+```
+
+## DELETE
+
+# Delete check in/check out dates, price, and guest info for specific home.
+```sh
+DELETE /reservations/:id
+```
