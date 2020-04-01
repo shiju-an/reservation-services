@@ -48,39 +48,39 @@ npm run server-dev
 ```
 Go to url http://localhost:3000/ to view app
 
-### Endpoints
+## Endpoints
 
-## CREATE
+### CREATE
 
-# Post check in/check out dates, price, and guest info for specific home.
+#### Post check in/check out dates, price, and guest info for specific home.
 ```sh
 POST /reservations/:id
 ```
 
 Parameters
 
-## READ
+### READ
 
-# Get rate, review average, total reviews, service fee, and occupancy tax for specific home.
+#### Get rate, review average, total reviews, service fee, and occupancy tax for specific home.
 ```sh
 GET /location/:id
 ```
 
-# Get check in/check out dates, price, and guest info for specific home.
+##### Get check in/check out dates, price, and guest info for specific home.
 ```sh
 GET /reservations/:id
 ```
 
-## UPDATE
+### UPDATE
 
-# Update check in/check out dates, price, and guest info for specific home.
+##### Update check in/check out dates, price, and guest info for specific home.
 ```sh
 PUT /reservations/:id
 ```
 
-## DELETE
+### DELETE
 
-# Delete check in/check out dates, price, and guest info for specific home.
+#### Delete check in/check out dates, price, and guest info for specific home.
 ```sh
 DELETE /reservations/:id
 ```
