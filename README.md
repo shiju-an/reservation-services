@@ -54,7 +54,7 @@ Go to url http://localhost:3000/ to view app
 
 Post check in/check out dates, price, and guest info for specific home.
 ```sh
-POST /reservations/:id
+POST location/:id/reservations
 ```
 
 #### Sample Request
@@ -94,7 +94,7 @@ GET /location/:id
 
 Get check in/check out dates, price, and guest info for specific home.
 ```sh
-GET /reservations/:id
+GET location/:id/reservations
 ```
 
 #### Sample Response
@@ -115,7 +115,7 @@ GET /reservations/:id
 
 Update check in/check out dates, price, and guest info for specific home.
 ```sh
-PUT /reservations/:id
+PUT location/:id/reservations/:id
 ```
 
 Only fields requested will be updated. Price will be updated to reflect changes.
@@ -147,7 +147,7 @@ Only fields requested will be updated. Price will be updated to reflect changes.
 
 Delete check in/check out dates, price, and guest info for specific home.
 ```sh
-DELETE /reservations/:id
+DELETE location/:id/reservations/:id
 ```
 
 #### Sample Request
