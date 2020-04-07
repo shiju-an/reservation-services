@@ -1,3 +1,9 @@
+DROP DATABASE IF EXISTS relaxlyBypj3;
+
+CREATE DATABASE relaxlyBypj3;
+
+USE relaxlyBypj3;
+
 CREATE TABLE users (
   user_id INT NOT NULL AUTO_INCREMENT,
   username VARCHAR (60),
