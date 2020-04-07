@@ -19,7 +19,7 @@ const seedReservationsAndUsers = () => {
         children: randRange(0, 5),
         infants: randRange(0, 5),
         price: randRange(100, 2000),
-        user_id: i,
+        user_id: j,
         username: faker.internet.userName(),
         email: faker.internet.email(),
       });
