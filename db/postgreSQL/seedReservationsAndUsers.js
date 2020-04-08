@@ -35,6 +35,7 @@ const uniqueTotal = 10000;
 const reservations = [];
 const users = [];
 let userCount = 0;
+let locationCount = 0;
 
 const generateReservationsAndUsers = () => {
   const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
@@ -48,7 +49,7 @@ const generateReservationsAndUsers = () => {
       const children = randRange(0, 5);
       const infants = randRange(0, 5);
       const price = randRange(100, 2000);
-
+      const location_id = locationCount++;
       const user_id = userCount++;
       const username = faker.internet.userName();
       const email = faker.internet.email();
@@ -61,7 +62,7 @@ const generateReservationsAndUsers = () => {
         children,
         infants,
         price,
-        location_id: i,
+        location_id,
         user_id,
       };
       reservations.push(reservation);

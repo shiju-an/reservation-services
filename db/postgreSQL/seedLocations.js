@@ -7,7 +7,7 @@ const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 const locationWriter = createCsvWriter({
   path: './data/locations.csv',
   header: [
-    { id: 'id', title: 'id' },
+    { id: 'location_id', title: 'location_id' },
     { id: 'location_address', title: 'location_address' },
     { id: 'rate', title: 'rate' },
     { id: 'review_avg', title: 'review_avg' },
@@ -18,12 +18,14 @@ const locationWriter = createCsvWriter({
 });
 
 const uniqueTotal = 10000;
+let locationTotal = 0;
 
 const generateLocations = () => {
   const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
   const locations = [];
 
   for (let i = 0; i < uniqueTotal; i++) {
+    const location_id = locationTotal++;
     const location_address = faker.fake('{{address.streetAddress}}, {{address.city}}');
     const rate = randRange(20, 100);
     const review_avg = (Math.random() * 5).toFixed(2);
@@ -32,7 +34,7 @@ const generateLocations = () => {
     const occupancy_tax = randRange(1, 8);
 
     const location = {
-      id: i,
+      location_id,
       location_address,
       rate,
       review_avg,
