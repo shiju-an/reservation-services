@@ -24,7 +24,7 @@ const reservationWriter = createCsvWriter({
 const userWriter = createCsvWriter({
   path: './data/users.csv',
   header: [
-    { id: 'user_id', title: 'user_id' },
+    // { id: 'user_id', title: 'user_id' },
     { id: 'username', title: 'username' },
     { id: 'email', title: 'email' },
 
@@ -32,57 +32,66 @@ const userWriter = createCsvWriter({
 });
 
 const uniqueTotal = 10000;
-const reservations = [];
-const users = [];
-let userCount = 0;
+let resUseCount = 0;
 let locationCount = 0;
+let reservationCount = 0;
+// let userCount = 0;
 
 const generateReservationsAndUsers = () => {
   const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
+  const reservations = [];
+  const users = [];
 
   for (let i = 0; i < uniqueTotal; i++) {
     for (let j = 0; j < Math.floor((Math.random() * 5) + 5); j++) {
-      const reservation_id = j;
       const checkin_date = `2020-${j + 1}-${randRange(1, 14)}`;
       const checkout_date = `2020-${j + 1}-${randRange(15, 28)}`;
       const adults = randRange(1, 5);
       const children = randRange(0, 5);
       const infants = randRange(0, 5);
       const price = randRange(100, 2000);
-      const location_id = locationCount++;
-      const user_id = userCount++;
       const username = faker.internet.userName();
       const email = faker.internet.email();
 
+      const user = {
+        // user_id: userCount,
+        username,
+        email,
+      };
+
       const reservation = {
-        reservation_id,
+        reservation_id: reservationCount,
         checkin_date,
         checkout_date,
         adults,
         children,
         infants,
         price,
-        location_id,
-        user_id,
+        location_id: locationCount,
+        user_id: resUseCount,
       };
+
+      users.push(user);
       reservations.push(reservation);
 
-      const user = {
-        user_id,
-        username,
-        email,
-      };
-      users.push(user);
+      reservationCount ++;
+      // userCount++;
+      resUseCount ++;
+
     }
+    locationCount++;
   }
   return [reservations, users];
 };
 
-const total = 100;
+const total = 1000;
+// let resCount = 0;
+// let useCount = 0;
 let count = 0;
-const data = generateReservationsAndUsers();
+let data;
 
 const writeReservations = () => {
+  data = generateReservationsAndUsers();
   if (count < total) {
     reservationWriter.writeRecords(data[0])
       .then(() => {
@@ -104,6 +113,7 @@ const writeReservations = () => {
 
 const writeUsers = () => {
   if (count < total) {
+    data = generateReservationsAndUsers();
     userWriter.writeRecords(data[1])
       .then(() => {
         count++;

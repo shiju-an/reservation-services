@@ -18,14 +18,14 @@ const locationWriter = createCsvWriter({
 });
 
 const uniqueTotal = 10000;
-let locationTotal = 0;
+let locationCount = 0;
 
 const generateLocations = () => {
   const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
   const locations = [];
 
   for (let i = 0; i < uniqueTotal; i++) {
-    const location_id = locationTotal++;
+    const location_id = locationCount++;
     const location_address = faker.fake('{{address.streetAddress}}, {{address.city}}');
     const rate = randRange(20, 100);
     const review_avg = (Math.random() * 5).toFixed(2);
