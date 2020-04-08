@@ -2,8 +2,7 @@ const faker = require('faker');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const cliProgress = require('cli-progress');
 
-const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
-const bar2 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
 const reservationWriter = createCsvWriter({
   path: './data/cassreservations.csv',
@@ -29,114 +28,80 @@ const reservationWriter = createCsvWriter({
 });
 
 const uniqueTotal = 100;
-let resUseCount = 0;
+let userCount = 0;
 let locationCount = 0;
 let reservationCount = 0;
 
-const generateReservationsAndUsers = () => {
+const generateReservations = () => {
   const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
   const reservations = [];
-  const users = [];
 
   for (let i = 0; i < uniqueTotal; i++) {
+    const location_id = locationCount++;
     for (let j = 0; j < Math.floor((Math.random() * 5) + 5); j++) {
+      const location_address = faker.fake('{{address.streetAddress}}, {{address.city}}');
+      const rate = randRange(20, 100);
+      const review_avg = (Math.random() * 5).toFixed(2);
+      const total_review = randRange(50, 500);
+      const service_fee = randRange(5, 10);
+      const occupancy_tax = randRange(1, 8);
+      const reservation_id = reservationCount++;
       const checkin_date = `2020-${j + 1}-${randRange(1, 14)}`;
       const checkout_date = `2020-${j + 1}-${randRange(15, 28)}`;
       const adults = randRange(1, 5);
       const children = randRange(0, 5);
       const infants = randRange(0, 5);
       const price = randRange(100, 2000);
+      const user_id = userCount++;
       const username = faker.internet.userName();
       const email = faker.internet.email();
 
-      const user = {
-        // user_id: userCount,
-        username,
-        email,
-      };
-
       const reservation = {
-        reservation_id: reservationCount,
+        location_id,
+        location_address,
+        rate,
+        review_avg,
+        total_review,
+        service_fee,
+        occupancy_tax,
+        reservation_id,
         checkin_date,
         checkout_date,
         adults,
         children,
         infants,
         price,
-        location_id: locationCount,
-        user_id: resUseCount,
+        user_id,
+        username,
+        email,
       };
 
-      users.push(user);
       reservations.push(reservation);
-
-      reservationCount ++;
-      // userCount++;
-      resUseCount ++;
-
+      bar.increment();
     }
-    locationCount++;
   }
-  return [reservations, users];
+  return reservations;
 };
 
-const total = 1000;
-// let resCount = 0;
-// let useCount = 0;
+const total = 2;
 let count = 0;
-let data;
 
 const writeReservations = () => {
-  data = generateReservationsAndUsers();
+  let data = generateReservations();
   if (count < total) {
-    reservationWriter.writeRecords(data[0])
+    reservationWriter.writeRecords(data)
       .then(() => {
         count++;
-        bar1.increment();
         writeReservations();
       })
       .catch(() => {
         console.log('cry, error in csv writing AS ALWAYS');
       });
   } else {
-    bar1.stop();
-    console.log('PLEASE BE FAST LIKE SPEED RACER ALSO IS RESERVATIONS SPLIT??');
-    count = 0;
-    bar2.start(total, 0);
-    writeUsers();
+    bar.stop();
+    console.log('zoom zoom zoom please aka cass reservations');
   }
 };
 
-const writeUsers = () => {
-  if (count < total) {
-    data = generateReservationsAndUsers();
-    userWriter.writeRecords(data[1])
-      .then(() => {
-        count++;
-        bar2.increment();
-        writeUsers();
-      })
-      .catch(() => {
-        console.log('cry, error in csv writing AS ALWAYS');
-      });
-  } else {
-    bar2.stop();
-    console.log('PLEASE BE FAST LIKE SPEED RACER ALSO IS USERS SPLIT??');
-  }
-};
-
-bar1.start(total, 0);
+bar.start(total, 0);
 writeReservations();
-
-//csv writer
-
-//native javascript
-
-//could be writing a lot of times
-//faker functions super expensive
-//memory management
-//overload harddisc if dont have space
-// under an hour or two
-// decrease amount of writing to file
-// write in bulk
-// increase speed
