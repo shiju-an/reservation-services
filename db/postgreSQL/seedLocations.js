@@ -12,8 +12,8 @@
 //   writer.pipe(fs.createWriteStream('locationsData.csv'));
 
 //   const rate = randRange(20, 100);
-//   const reviewAvg = (Math.random() * 5).toFixed(2);
-//   const totalReview = randRange(50, 500);
+//   const review_avg = (Math.random() * 5).toFixed(2);
+//   const total_review = randRange(50, 500);
 //   const serviceFee = randRange(5, 10);
 //   const occupancyTax = randRange(1, 8);
 
@@ -101,12 +101,12 @@ const locationWriter = createCsvWriter({
   path: './data/locations.csv',
   header: [
     { id: 'id', title: 'id' },
-    { id: 'locationAddress', title: 'locationAddress' },
+    { id: 'location_address', title: 'location_address' },
     { id: 'rate', title: 'rate' },
-    { id: 'reviewAvg', title: 'reviewAvg' },
-    { id: 'totalReview', title: 'totalReview' },
-    { id: 'serviceFee', title: 'serviceFee' },
-    { id: 'occupancyTax', title: 'occupancyTax' },
+    { id: 'review_avg', title: 'review_avg' },
+    { id: 'total_review', title: 'total_review' },
+    { id: 'service_fee', title: 'service_fee' },
+    { id: 'occupancy_tax', title: 'occupancy_tax' },
   ]
 });
 
@@ -117,21 +117,21 @@ const generateLocations = () => {
   const locations = [];
 
   for (let i = 0; i < uniqueTotal; i++) {
-    const locationAddress = faker.fake('{{address.streetAddress}}, {{address.city}}');
+    const location_address = faker.fake('{{address.streetAddress}}, {{address.city}}');
     const rate = randRange(20, 100);
-    const reviewAvg = (Math.random() * 5).toFixed(2);
-    const totalReview = randRange(50, 500);
-    const serviceFee = randRange(5, 10);
-    const occupancyTax = randRange(1, 8);
+    const review_avg = (Math.random() * 5).toFixed(2);
+    const total_review = randRange(50, 500);
+    const service_fee = randRange(5, 10);
+    const occupancy_tax = randRange(1, 8);
 
     const location = {
       id: i,
-      locationAddress,
+      location_address,
       rate,
-      reviewAvg,
-      totalReview,
-      serviceFee,
-      occupancyTax,
+      review_avg,
+      total_review,
+      service_fee,
+      occupancy_tax,
     };
     locations.push(location);
     bar.increment();

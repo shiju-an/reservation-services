@@ -61,9 +61,9 @@ const reservationWriter = createCsvWriter({
   path: './data/reservations.csv',
   header: [
     { id: 'id', title: 'id' },
-    { id: 'reservationId', title: 'reservationId' },
-    { id: 'checkin', title: 'checkin' },
-    { id: 'checkout', title: 'checkout' },
+    { id: 'reservation_id', title: 'reservation_id' },
+    { id: 'checkin_date', title: 'checkin_date' },
+    { id: 'checkout_date', title: 'checkout_date' },
     { id: 'adults', title: 'adults' },
     { id: 'children', title: 'children' },
     { id: 'infants', title: 'infants' },
@@ -75,7 +75,7 @@ const userWriter = createCsvWriter({
   path: './data/users.csv',
   header: [
     { id: 'id', title: 'id' },
-    { id: 'userId', title: 'userId' },
+    { id: 'user_id', title: 'user_id' },
     { id: 'username', title: 'username' },
     { id: 'email', title: 'email' },
 
@@ -91,23 +91,23 @@ const generateReservationsAndUsers = () => {
 
   for (let i = 0; i < uniqueTotal; i++) {
     for (let j = 0; j < Math.floor((Math.random() * 5) + 5); j++) {
-      const reservationId = j;
-      const checkin = `2020-${j + 1}-${randRange(1, 14)}`;
-      const checkout = `2020-${j + 1}-${randRange(15, 28)}`;
+      const reservation_id = j;
+      const checkin_date = `2020-${j + 1}-${randRange(1, 14)}`;
+      const checkout_date = `2020-${j + 1}-${randRange(15, 28)}`;
       const adults = randRange(1, 5);
       const children = randRange(0, 5);
       const infants = randRange(0, 5);
       const price = randRange(100, 2000);
 
-      const userId = j;
+      const user_id = j;
       const username = faker.internet.userName();
       const email = faker.internet.email();
 
       const reservation = {
-        id: i,
-        reservationId,
-        checkin,
-        checkout,
+        location_id: i,
+        reservation_id,
+        checkin_date,
+        checkout_date,
         adults,
         children,
         infants,
@@ -116,8 +116,7 @@ const generateReservationsAndUsers = () => {
       reservations.push(reservation);
 
       const user = {
-        id: i,
-        userId,
+        user_id,
         username,
         email,
       };
