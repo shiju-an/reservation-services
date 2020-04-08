@@ -8,7 +8,6 @@ const bar2 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 const reservationWriter = createCsvWriter({
   path: './data/reservations.csv',
   header: [
-    { id: 'id', title: 'id' },
     { id: 'reservation_id', title: 'reservation_id' },
     { id: 'checkin_date', title: 'checkin_date' },
     { id: 'checkout_date', title: 'checkout_date' },
@@ -16,13 +15,15 @@ const reservationWriter = createCsvWriter({
     { id: 'children', title: 'children' },
     { id: 'infants', title: 'infants' },
     { id: 'price', title: 'price' },
+    { id: 'location_id', title: 'location_id' },
+    { id: 'user_id', title: 'user_id' },
+
   ]
 });
 
 const userWriter = createCsvWriter({
   path: './data/users.csv',
   header: [
-    { id: 'id', title: 'id' },
     { id: 'user_id', title: 'user_id' },
     { id: 'username', title: 'username' },
     { id: 'email', title: 'email' },
@@ -33,6 +34,7 @@ const userWriter = createCsvWriter({
 const uniqueTotal = 10000;
 const reservations = [];
 const users = [];
+let userCount = 0;
 
 const generateReservationsAndUsers = () => {
   const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
@@ -47,19 +49,20 @@ const generateReservationsAndUsers = () => {
       const infants = randRange(0, 5);
       const price = randRange(100, 2000);
 
-      const user_id = j;
+      const user_id = userCount++;
       const username = faker.internet.userName();
       const email = faker.internet.email();
 
       const reservation = {
-        location_id: i,
         reservation_id,
         checkin_date,
         checkout_date,
         adults,
         children,
         infants,
-        price
+        price,
+        location_id: i,
+        user_id,
       };
       reservations.push(reservation);
 
@@ -74,7 +77,7 @@ const generateReservationsAndUsers = () => {
   return [reservations, users];
 };
 
-const total = 1000;
+const total = 100;
 let count = 0;
 const data = generateReservationsAndUsers();
 
