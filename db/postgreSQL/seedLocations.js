@@ -89,3 +89,75 @@
 //   bar.stop();
 //   writeLocations.end();
 // });
+
+
+const faker = require('faker');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const cliProgress = require('cli-progress');
+
+const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+
+const locationWriter = createCsvWriter({
+  path: './data/locations.csv',
+  header: [
+    { id: 'id', title: 'id' },
+    { id: 'locationAddress', title: 'locationAddress' },
+    { id: 'rate', title: 'rate' },
+    { id: 'reviewAvg', title: 'reviewAvg' },
+    { id: 'totalReview', title: 'totalReview' },
+    { id: 'serviceFee', title: 'serviceFee' },
+    { id: 'occupancyTax', title: 'occupancyTax' },
+  ]
+});
+
+const uniqueTotal = 10000;
+
+const generateLocations = () => {
+  const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
+  const locations = [];
+
+  for (let i = 0; i < uniqueTotal; i++) {
+    const locationAddress = faker.fake('{{address.streetAddress}}, {{address.city}}');
+    const rate = randRange(20, 100);
+    const reviewAvg = (Math.random() * 5).toFixed(2);
+    const totalReview = randRange(50, 500);
+    const serviceFee = randRange(5, 10);
+    const occupancyTax = randRange(1, 8);
+
+    const location = {
+      id: i,
+      locationAddress,
+      rate,
+      reviewAvg,
+      totalReview,
+      serviceFee,
+      occupancyTax,
+    };
+    locations.push(location);
+    bar.increment();
+  }
+  return locations;
+};
+
+const total = 1000;
+let count = 0;
+
+const writeLocations = () => {
+  if (count < total) {
+    const locations = generateLocations();
+    locationWriter.writeRecords(locations)
+      .then(() => {
+        count++;
+        writeLocations();
+      })
+      .catch(() => {
+        console.log('cry, error in csv writing AS ALWAYS');
+      });
+  } else {
+    bar.stop();
+    console.log('PLEASE BE FAST LIKE SPEED RACER');
+  }
+};
+
+bar.start(uniqueTotal * total, 0);
+writeLocations();
