@@ -27,24 +27,26 @@ const reservationWriter = createCsvWriter({
   ]
 });
 
+const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
+
 const uniqueTotal = 100;
-let userCount = 0;
-let locationCount = 0;
-let reservationCount = 0;
+
+let userCount = 1;
+let locationCount = 1;
+let reservationCount = 1;
 
 const generateReservations = () => {
-  const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
   const reservations = [];
 
   for (let i = 0; i < uniqueTotal; i++) {
     const location_id = locationCount++;
+    const location_address = `${faker.address.streetAddress()}, ${faker.address.city()}`;
+    const rate = randRange(20, 100);
+    const review_avg = (Math.random() * 5).toFixed(2);
+    const total_review = randRange(50, 500);
+    const service_fee = randRange(5, 10);
+    const occupancy_tax = randRange(1, 8);
     for (let j = 0; j < Math.floor((Math.random() * 5) + 5); j++) {
-      const location_address = `${faker.address.streetAddress()}, ${faker.address.city()}`;
-      const rate = randRange(20, 100);
-      const review_avg = (Math.random() * 5).toFixed(2);
-      const total_review = randRange(50, 500);
-      const service_fee = randRange(5, 10);
-      const occupancy_tax = randRange(1, 8);
       const reservation_id = reservationCount++;
       const checkin_date = `2020-${j + 1}-${randRange(1, 14)}`;
       const checkout_date = `2020-${j + 1}-${randRange(15, 28)}`;
@@ -75,7 +77,6 @@ const generateReservations = () => {
         username,
         email,
       };
-
       reservations.push(reservation);
       bar.increment();
     }
@@ -95,13 +96,13 @@ const writeReservations = () => {
         writeReservations();
       })
       .catch(() => {
-        console.log('cry, error in csv writing AS ALWAYS  (╯°□°）╯︵ ┻━┻');
+        console.log('cry, error in csv writing AS ALWAYS (╯°□°）╯︵ ┻━┻');
       });
   } else {
     bar.stop();
-    console.log('zoom zoom zoom please aka cass reservations  (╯°□°）╯︵ ┻━┻');
+    console.log('zoom zoom zoom please aka cass reservations');
   }
 };
-setInterval(() => (console.log('(╯°□°）╯︵ ┻━┻')), 5000);
+
 bar.start(total, 0);
 writeReservations();
