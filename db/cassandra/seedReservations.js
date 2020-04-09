@@ -27,7 +27,7 @@ const reservationWriter = createCsvWriter({
   ]
 });
 
-const uniqueTotal = 20;
+const uniqueTotal = 10000;
 
 let userCount = 1;
 let locationCount = 1;
@@ -77,13 +77,12 @@ const generateReservations = () => {
         email,
       };
       reservations.push(reservation);
-      bar.increment();
     }
   }
   return reservations;
 };
 
-const total = 1;
+const total = 1000;
 let count = 0;
 
 const writeReservations = () => {
@@ -92,6 +91,7 @@ const writeReservations = () => {
     reservationWriter.writeRecords(reservations)
       .then(() => {
         count++;
+        bar.increment();
         writeReservations();
       })
       .catch(() => {
@@ -103,5 +103,5 @@ const writeReservations = () => {
   }
 };
 
-bar.start(uniqueTotal * total, 0);
+bar.start(total, 0);
 writeReservations();
