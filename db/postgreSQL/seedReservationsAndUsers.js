@@ -2,8 +2,7 @@ const faker = require('faker');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const cliProgress = require('cli-progress');
 
-const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
-const bar2 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
 const reservationWriter = createCsvWriter({
   path: './data/reservations.csv',
@@ -24,7 +23,6 @@ const reservationWriter = createCsvWriter({
 const userWriter = createCsvWriter({
   path: './data/users.csv',
   header: [
-    // { id: 'user_id', title: 'user_id' },
     { id: 'username', title: 'username' },
     { id: 'email', title: 'email' },
 
@@ -35,7 +33,6 @@ const uniqueTotal = 10000;
 let resUseCount = 0;
 let locationCount = 0;
 let reservationCount = 0;
-// let userCount = 0;
 
 const generateReservationsAndUsers = () => {
   const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
@@ -54,7 +51,6 @@ const generateReservationsAndUsers = () => {
       const email = faker.internet.email();
 
       const user = {
-        // user_id: userCount,
         username,
         email,
       };
@@ -74,9 +70,8 @@ const generateReservationsAndUsers = () => {
       users.push(user);
       reservations.push(reservation);
 
-      reservationCount ++;
-      // userCount++;
-      resUseCount ++;
+      reservationCount++;
+      resUseCount++;
 
     }
     locationCount++;
@@ -85,8 +80,6 @@ const generateReservationsAndUsers = () => {
 };
 
 const total = 1000;
-// let resCount = 0;
-// let useCount = 0;
 let count = 0;
 let data;
 
@@ -95,41 +88,44 @@ const writeReservations = () => {
   if (count < total) {
     reservationWriter.writeRecords(data[0])
       .then(() => {
-        count++;
-        bar1.increment();
-        writeReservations();
+        userWriter.writeRecords(data[1])
+          .then(() => {
+            count++;
+            bar.increment();
+            writeReservations();
+          })
+          .catch(() => {
+            console.log('cry, error in csv writing AS ALWAYS');
+          });
       })
       .catch(() => {
         console.log('cry, error in csv writing AS ALWAYS');
       });
   } else {
-    bar1.stop();
+    bar.stop();
     console.log('PLEASE BE FAST LIKE SPEED RACER ALSO IS RESERVATIONS SPLIT??');
-    count = 0;
-    bar2.start(total, 0);
-    writeUsers();
   }
 };
 
-const writeUsers = () => {
-  if (count < total) {
-    data = generateReservationsAndUsers();
-    userWriter.writeRecords(data[1])
-      .then(() => {
-        count++;
-        bar2.increment();
-        writeUsers();
-      })
-      .catch(() => {
-        console.log('cry, error in csv writing AS ALWAYS');
-      });
-  } else {
-    bar2.stop();
-    console.log('PLEASE BE FAST LIKE SPEED RACER ALSO IS USERS SPLIT??');
-  }
-};
+// const writeUsers = () => {
+//   if (count < total) {
+//     data = generateReservationsAndUsers();
+//     userWriter.writeRecords(data[1])
+//       .then(() => {
+//         count++;
+//         bar2.increment();
+//         writeUsers();
+//       })
+//       .catch(() => {
+//         console.log('cry, error in csv writing AS ALWAYS');
+//       });
+//   } else {
+//     bar2.stop();
+//     console.log('PLEASE BE FAST LIKE SPEED RACER ALSO IS USERS SPLIT??');
+//   }
+// };
 
-bar1.start(total, 0);
+bar.start(total, 0);
 writeReservations();
 
 //csv writer
