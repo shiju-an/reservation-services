@@ -18,7 +18,7 @@ const locationWriter = createCsvWriter({
 });
 
 const uniqueTotal = 10000;
-let locationCount = 0;
+let locationCount = 1;
 
 const generateLocations = () => {
   const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
