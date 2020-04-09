@@ -39,7 +39,7 @@ const generateReservations = () => {
   for (let i = 0; i < uniqueTotal; i++) {
     const location_id = locationCount++;
     for (let j = 0; j < Math.floor((Math.random() * 5) + 5); j++) {
-      const location_address = faker.fake('{{address.streetAddress}}, {{address.city}}');
+      const location_address = `${faker.address.streetAddress()}, ${faker.address.city()}`;
       const rate = randRange(20, 100);
       const review_avg = (Math.random() * 5).toFixed(2);
       const total_review = randRange(50, 500);
@@ -95,13 +95,13 @@ const writeReservations = () => {
         writeReservations();
       })
       .catch(() => {
-        console.log('cry, error in csv writing AS ALWAYS');
+        console.log('cry, error in csv writing AS ALWAYS  (╯°□°）╯︵ ┻━┻');
       });
   } else {
     bar.stop();
-    console.log('zoom zoom zoom please aka cass reservations');
+    console.log('zoom zoom zoom please aka cass reservations  (╯°□°）╯︵ ┻━┻');
   }
 };
-
+setInterval(() => (console.log('(╯°□°）╯︵ ┻━┻')), 5000);
 bar.start(total, 0);
 writeReservations();
