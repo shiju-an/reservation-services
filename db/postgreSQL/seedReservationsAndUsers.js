@@ -30,9 +30,9 @@ const userWriter = createCsvWriter({
 });
 
 const uniqueTotal = 10000;
-let resUseCount = 0;
-let locationCount = 0;
-let reservationCount = 0;
+let resUseCount = 1;
+let locationCount = 1;
+let reservationCount = 1;
 
 const generateReservationsAndUsers = () => {
   const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
@@ -95,35 +95,17 @@ const writeReservations = () => {
             writeReservations();
           })
           .catch(() => {
-            console.log('cry, error in csv writing AS ALWAYS');
+            console.log('cry, error in csv writing AS ALWAYS   (╯°□°）╯︵ ┻━┻');
           });
       })
       .catch(() => {
-        console.log('cry, error in csv writing AS ALWAYS');
+        console.log('cry, error in csv writing AS ALWAYS  (╯°□°）╯︵ ┻━┻');
       });
   } else {
     bar.stop();
-    console.log('PLEASE BE FAST LIKE SPEED RACER ALSO IS RESERVATIONS SPLIT??');
+    console.log('I am crying too much T_T   (╯°□°）╯︵ ┻━┻ ');
   }
 };
-
-// const writeUsers = () => {
-//   if (count < total) {
-//     data = generateReservationsAndUsers();
-//     userWriter.writeRecords(data[1])
-//       .then(() => {
-//         count++;
-//         bar2.increment();
-//         writeUsers();
-//       })
-//       .catch(() => {
-//         console.log('cry, error in csv writing AS ALWAYS');
-//       });
-//   } else {
-//     bar2.stop();
-//     console.log('PLEASE BE FAST LIKE SPEED RACER ALSO IS USERS SPLIT??');
-//   }
-// };
 
 bar.start(total, 0);
 writeReservations();
