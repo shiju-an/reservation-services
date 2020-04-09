@@ -21,8 +21,10 @@ CREATE TABLE reservations (
   price int,
   user_id int,
   username text,
+  email text,
   PRIMARY KEY (location_id, reservation_id)
-);
+) WITH CLUSTERING ORDER BY (reservation_id ASC);
 
-COPY reservations(location_id, location_address, rate, review_avg, total_review, service_fee, occupancy_tax, reservation_id, checkin_date, checkout_date, adults, children, infants, price, user_id, username) FROM '/Users/ohjeezz/Documents/HackReactor/pj3/reservation-services/db/cassandra/data/cassreservations.csv' WITH HEADER=TRUE AND DELIMITER=',';
+
+COPY reservations(location_id, location_address, rate, review_avg, total_review, service_fee, occupancy_tax, reservation_id, checkin_date, checkout_date, adults, children, infants, price, user_id, username, email) FROM '/Users/ohjeezz/Documents/HackReactor/pj3/reservation-services/db/cassandra/data/cassreservations.csv' WITH HEADER=TRUE AND DELIMITER=',';
 

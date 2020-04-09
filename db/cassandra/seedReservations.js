@@ -23,18 +23,18 @@ const reservationWriter = createCsvWriter({
     { id: 'price', title: 'price' },
     { id: 'user_id', title: 'user_id' },
     { id: 'username', title: 'username' },
+    { id: 'email', title: 'email' },
   ]
 });
 
-const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
-
-const uniqueTotal = 10;
+const uniqueTotal = 20;
 
 let userCount = 1;
 let locationCount = 1;
 let reservationCount = 1;
 
 const generateReservations = () => {
+  const randRange = (min, max) => Math.floor((Math.random() * (max - min)) + min);
   const reservations = [];
 
   for (let i = 0; i < uniqueTotal; i++) {
@@ -54,7 +54,8 @@ const generateReservations = () => {
       const infants = randRange(0, 5);
       const price = randRange(100, 2000);
       const user_id = userCount++;
-      const username = faker.internet.userName();
+      const username = `'${faker.internet.userName()}'`;
+      const email = `'${faker.internet.email()}'`;
 
       const reservation = {
         location_id,
@@ -73,6 +74,7 @@ const generateReservations = () => {
         price,
         user_id,
         username,
+        email,
       };
       reservations.push(reservation);
       bar.increment();
@@ -81,13 +83,13 @@ const generateReservations = () => {
   return reservations;
 };
 
-const total = 2;
+const total = 1;
 let count = 0;
 
 const writeReservations = () => {
-  let data = generateReservations();
+  const reservations = generateReservations();
   if (count < total) {
-    reservationWriter.writeRecords(data)
+    reservationWriter.writeRecords(reservations)
       .then(() => {
         count++;
         writeReservations();
@@ -101,5 +103,5 @@ const writeReservations = () => {
   }
 };
 
-bar.start(total, 0);
+bar.start(uniqueTotal * total, 0);
 writeReservations();
