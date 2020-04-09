@@ -11,7 +11,11 @@
     "seed": "node ./db/dummyData.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "test": "jest"
+    "test": "jest",
+    "pg-write-locations": "node ./db/postgreSQL/seedLocations.js", //not working
+    "pg-write-resusers": "node ./db/postgreSQL/seedReservationsAndUsers.js", //not working
+    "pg-seed": "psql -f ./db/postgreSQL/schema.sql",
+    "cass-write": "node ./db/cassandra/seedReservations.js" //not working
   },
   "dependencies": {
     "babel": "^6.23.0",
