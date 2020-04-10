@@ -11,7 +11,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE locations (
-  location_id INT PRIMARY KEY,
+  location_id SERIAL PRIMARY KEY,
   location_address VARCHAR (300),
   rate INT NOT NULL,
   review_avg NUMERIC(3,2) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE locations (
 );
 
 CREATE TABLE reservations (
-  reservation_id INT PRIMARY KEY,
+  reservation_id SERIAL PRIMARY KEY,
   checkin_date DATE NOT NULL,
   checkout_date DATE NOT NULL,
   adults INT,
@@ -43,6 +43,7 @@ COPY reservations FROM '/Users/ohjeezz/Documents/HackReactor/pj3/reservation-ser
 ALTER TABLE reservations ADD CONSTRAINT fk_locations FOREIGN KEY (location_id) REFERENCES locations(location_id);
 ALTER TABLE reservations ADD CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES users(user_id);
 
+CREATE INDEX idx_location_id ON reservations USING HASH (location_id);
 
 
 
