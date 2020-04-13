@@ -14,14 +14,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // reservations
-// app.get('/reservation/api/reservations', (req, res) => {
-//   Controller.getFirstReservations(req, res);
-// });
-
-// locations
-// app.get('/reservation/api/location/', (req, res) => {
-//   Controller.getLocation(req, res);
-// });
+app.get('/location/:id/reservations', (req, res) => {
+  Controller.getFirstReservations(req, res);
+});
 
 // locations
 app.get('/location/:id', (req, res) => {

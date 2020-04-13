@@ -54,24 +54,24 @@ class App extends React.Component {
     // console.log(splitUrl)
     const index = splitUrl[splitUrl.length - 1];
     // console.log(index);
-    // this.getFirstReservations(index);
+    this.getFirstReservations(index);
     this.getLocation(index);
   }
 
   // requests
-  // getFirstReservations(locationId) {
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: 'http://localhost:3000/reservation/api/reservations',
-  //     data: { id: locationId },
-  //     success: (data) => {
-  //       console.log(data);
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     }
-  //   });
-  // }
+  getFirstReservations(locationId) {
+    $.ajax({
+      method: 'GET',
+      url: `http://localhost:3000/location/${locationId}/reservations`,
+      data: { id: locationId },
+      success: (data) => {
+        console.log(data, ' this is important reservation data please console log thank you');
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
   getLocation(locationId) {
     $.ajax({
