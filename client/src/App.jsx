@@ -76,18 +76,18 @@ class App extends React.Component {
   getLocation(locationId) {
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3000/location/',
+      url: `http://localhost:3000/location/${locationId}`,
       data: { id: locationId },
       success: (res) => {
-        console.log(res, ' this is very important data thanks');
-        // this.setState({
-        //   locationId: res[0].location_id,
-        //   rate: res[0].rate,
-        //   review_avg: res[0].review_avg,
-        //   total_review: res[0].total_review,
-        //   service_fee: res[0].service_fee,
-        //   occupancy_tax: res[0].occupancy_tax
-        // });
+        console.log(res[0], ' this is very important data thanks');
+        this.setState({
+          locationId: res[0].location_id,
+          rate: res[0].rate,
+          review_avg: res[0].review_avg,
+          total_review: res[0].total_review,
+          service_fee: res[0].service_fee,
+          occupancy_tax: res[0].occupancy_tax
+        });
       },
       error: (err) => {
         console.log(err);
