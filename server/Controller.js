@@ -1,16 +1,17 @@
-const db = require('../db');
+const Models = require('./Models.js');
 
 const getLocation = (req, res) => {
   const id = parseInt(req.params.id);
 
-  db.query('SELECT * FROM locations WHERE location_id = $1', [id], (err, data) => {
+  Models.getLocation(id, (err, data) => {
     if (err) {
       console.log('big error mayday');
+    } else {
+      res.status(200).send(data.rows);
     }
-    res.status(200).json(data.rows);
-  })
-}
+  });
+};
 
 module.exports = {
   getLocation
-}
+};

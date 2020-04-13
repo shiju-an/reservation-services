@@ -51,9 +51,9 @@ class App extends React.Component {
 
   componentDidMount() {
     const splitUrl = window.location.href.split('/');
-    console.log(splitUrl)
+    // console.log(splitUrl)
     const index = splitUrl[splitUrl.length - 1];
-    console.log(index);
+    // console.log(index);
     // this.getFirstReservations(index);
     this.getLocation(index);
   }
@@ -76,18 +76,18 @@ class App extends React.Component {
   getLocation(locationId) {
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3000/location',
+      url: 'http://localhost:3000/location/',
       data: { id: locationId },
-      success: (data) => {
-        console.log(data, ' this is very important data thanks');
-        this.setState({
-          locationId: data[0].id,
-          rate: data[0].rate,
-          review_avg: data[0].review_avg,
-          total_review: data[0].total_review,
-          service_fee: data[0].service_fee,
-          occupancy_tax: data[0].occupancy_tax
-        });
+      success: (res) => {
+        console.log(res, ' this is very important data thanks');
+        // this.setState({
+        //   locationId: res[0].location_id,
+        //   rate: res[0].rate,
+        //   review_avg: res[0].review_avg,
+        //   total_review: res[0].total_review,
+        //   service_fee: res[0].service_fee,
+        //   occupancy_tax: res[0].occupancy_tax
+        // });
       },
       error: (err) => {
         console.log(err);

@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-const Controller = require('./queries.js');
+
+const Controller = require('./Controller.js');
 
 const app = express();
 const port = 3000;
@@ -23,8 +24,9 @@ app.use(bodyParser.json());
 // });
 
 // locations
-app.get('/location/:id', Controller.getLocation
-);
+app.get('/location/:id', (req, res) => {
+  Controller.getLocation(req, res);
+});
 
 app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
