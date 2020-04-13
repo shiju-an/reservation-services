@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-const Controller = require('./Controller.js');
+const Controller = require('./queries.js');
 
 const app = express();
 const port = 3000;
@@ -23,12 +23,11 @@ app.use(bodyParser.json());
 // });
 
 // locations
-app.get('/location/', (req, res) => {
-  Controller.getLocation(req, res);
-});
+app.get('/location/:id', Controller.getLocation
+);
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '/../client/dist/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
 });
 
 app.listen(port, () => console.log(`hello come in am listening @ ${port} high five`));
