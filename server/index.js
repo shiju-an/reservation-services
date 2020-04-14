@@ -35,7 +35,7 @@ app.put('/location/:id/reservations/:id', (req, res) => {
 
 // delete reservation
 app.delete('/location/:id/reservations/:id', (req, res) => {
-  Controller.deleteReseration(req, res);
+  Controller.deleteReservation(req, res);
 });
 
 app.get('/*', (req, res) => {
