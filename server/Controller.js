@@ -24,9 +24,19 @@ const getLocation = (req, res) => {
 };
 
 const addReservation = (req, res) => {
-  Models.addReservation(req.body, (err, data) => {
+  Models.addReservation(req, (err, data) => {
     if (err) {
       console.log('big error posting new res mayday');
+    } else {
+      res.status(200);
+    }
+  });
+};
+
+const updateReservation = (req, res) => {
+  Models.updateReservation(req, (err, data) => {
+    if (err) {
+      console.log('meh error updating reservation @ location');
     } else {
       res.status(200);
     }
@@ -37,4 +47,5 @@ module.exports = {
   getFirstReservations,
   getLocation,
   addReservation,
+  updateReservation,
 };

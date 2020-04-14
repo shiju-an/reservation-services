@@ -28,6 +28,11 @@ app.post('/location/:id/reservations', (req, res) => {
   Controller.addReservation(req, res);
 });
 
+// update reservation
+app.put('/location/:id/reservations/:id', (req, res) => {
+  Controller.updateReservation(req, res);
+});
+
 app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
 });
