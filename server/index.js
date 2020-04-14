@@ -13,14 +13,19 @@ app.use('/', express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// reservations
+// get reservations
 app.get('/location/:id/reservations', (req, res) => {
   Controller.getFirstReservations(req, res);
 });
 
-// locations
+// get locations
 app.get('/location/:id', (req, res) => {
   Controller.getLocation(req, res);
+});
+
+// post new reservation
+app.post('/location/:id/reservations', (req, res) => {
+  Controller.addReservation(req, res);
 });
 
 app.get('/*', (req, res) => {

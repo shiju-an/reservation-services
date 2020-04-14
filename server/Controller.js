@@ -23,7 +23,18 @@ const getLocation = (req, res) => {
   });
 };
 
+const addReservation = (req, res) => {
+  Models.addReservation(req.body, (err, data) => {
+    if (err) {
+      console.log('big error posting new res mayday');
+    } else {
+      res.status(200);
+    }
+  });
+};
+
 module.exports = {
   getFirstReservations,
-  getLocation
+  getLocation,
+  addReservation,
 };
