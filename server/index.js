@@ -33,6 +33,11 @@ app.put('/location/:id/reservations/:id', (req, res) => {
   Controller.updateReservation(req, res);
 });
 
+// delete reservation
+app.delete('/location/:id/reservations/:id', (req, res) => {
+  Controller.deleteReseration(req, res);
+});
+
 app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
 });

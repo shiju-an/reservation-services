@@ -43,9 +43,20 @@ const updateReservation = (req, res) => {
   });
 };
 
+const deleteReservation = (req, res) => {
+  Models.deleteReservation(req, (err, data) => {
+    if (err) {
+      console.log('beep error deleting reservation @ location');
+    } else {
+      res.status(200);
+    }
+  });
+};
+
 module.exports = {
   getFirstReservations,
   getLocation,
   addReservation,
   updateReservation,
+  deleteReservation
 };
