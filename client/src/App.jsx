@@ -62,7 +62,7 @@ class App extends React.Component {
   getFirstReservations(locationId) {
     $.ajax({
       method: 'GET',
-      url: `http://ec2-52-53-223-116.us-west-1.compute.amazonaws.com:3000/location/${locationId}/reservations`,
+      url: `http://54.177.65.149:3000/location/${locationId}/reservations`,
       data: { id: locationId },
       success: (data) => {
         console.log(data, ' this is important reservation data please console log thank you');
@@ -76,7 +76,7 @@ class App extends React.Component {
   getLocation(locationId) {
     $.ajax({
       method: 'GET',
-      url: `http://ec2-52-53-223-116.us-west-1.compute.amazonaws.com:3000/location/${locationId}`,
+      url: `http://54.177.65.149:3000/location/${locationId}`,
       data: { id: locationId },
       success: (res) => {
         console.log(res[0], ' this is very important data thanks');
