@@ -41,6 +41,7 @@ app.delete('/location/:id/reservations/:id', (req, res) => {
   Controller.deleteReservation(req, res);
 });
 
+// loader.io test
 app.get('/loaderio-082e9159ff2544fac0434029e91a369b/', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/./loaderio-082e9159ff2544fac0434029e91a369b.txt'));
 });
