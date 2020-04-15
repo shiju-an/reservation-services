@@ -34,11 +34,11 @@ CREATE TABLE reservations (
   -- FOREIGN KEY (user_id) REFERENCES users (user_id) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-COPY locations FROM '/Users/ohjeezz/Documents/HackReactor/pj3/reservation-services/db/postgreSQL/data/locations.csv' DELIMITER ',' CSV HEADER;
+COPY locations FROM '/home/ec2-user/reservation-services/db/postgreSQL/data/locations.csv' DELIMITER ',' CSV HEADER;
 
-COPY users(username, email) FROM '/Users/ohjeezz/Documents/HackReactor/pj3/reservation-services/db/postgreSQL/data/users.csv' DELIMITER ',' CSV HEADER;
+COPY users(username, email) FROM '/home/ec2-user/reservation-services/db/postgreSQL/data/users.csv' DELIMITER ',' CSV HEADER;
 
-COPY reservations FROM '/Users/ohjeezz/Documents/HackReactor/pj3/reservation-services/db/postgreSQL/data/reservations.csv' DELIMITER ',' CSV HEADER;
+COPY reservations FROM '/home/ec2-user/reservation-services/data/reservations.csv' DELIMITER ',' CSV HEADER;
 
 ALTER TABLE reservations ADD CONSTRAINT fk_locations FOREIGN KEY (location_id) REFERENCES locations(location_id);
 ALTER TABLE reservations ADD CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES users(user_id);
