@@ -26,3 +26,12 @@ bundle.js
 
 # All csv generated data files
 *.csv
+
+# All pem files
+*.pem
+
+# Legacy code
+server/og server
+db/cassandra
+db/og db
+Dockerfile
