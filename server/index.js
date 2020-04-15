@@ -45,4 +45,8 @@ app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
 });
 
+app.get('/loaderio-082e9159ff2544fac0434029e91a369b/', (req, res) => {
+  res.sendFile(path.resolve(__dirname + '/./loaderio-082e9159ff2544fac0434029e91a369b.txt'));
+})
+
 app.listen(port, () => console.log(`hello come in am listening @ ${port} high five`));
