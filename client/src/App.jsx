@@ -52,7 +52,7 @@ class App extends React.Component {
   componentDidMount() {
     const splitUrl = window.location.href.split('/');
     // console.log(splitUrl)
-    const index = Math.floor(Math.random() * 10000000) + 1);
+    const index = Math.floor((Math.random() * 10000000) + 1);
     // console.log(index);
     this.getFirstReservations(index);
     this.getLocation(index);
